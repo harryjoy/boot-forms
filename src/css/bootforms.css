@@ -1,0 +1,26 @@
+.boot-form-main {
+	border: 1px solid #ccc;
+	min-height: 10px;
+}
+.boot-form-container {
+	padding: 20px;
+}
+.boot-form {
+}
+.boot-form-clear {
+	clear: both;
+}
+.boot-form-button-container {
+	float: right;
+	margin-right: 10px;
+}
+.boot-form-button {
+	margin-right: 5px;
+}
+.boot-form-element {
+	width: 100%;
+	padding: 5px;
+}
+.boot-form-element-wrapper {
+	margin: 10px;
+}
