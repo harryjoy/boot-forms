@@ -16,20 +16,46 @@
 	};
 	jQuery.fn.extend({
 		bootforms : function(options) {
-			if (typeof options==="object" || !options) {
-				setPropertiesToElem(this);
-				return startPreview(this, options);
-			} else{
-				return about;
+			try {
+				if (typeof options==="object" || !options) {
+					validateOptions(options);
+					setPropertiesToElem(this);
+					return startPreview(this, options);
+				} else{
+					return about;
+				}
+			} catch (e) {
+				var errorBox = new FormErrorBox("<b>Error:</b> " + e.message);
+				$(this).append(errorBox.get());
 			}
 		}
 	});
+	var VALID_TYPES = ['text', 'password', 'textarea', 'checkbox', 'radio', 'select'];
+	var validateOptions = function (options) {
+		var elems = options.form_elems;
+		if (elems && elems !== undefined && elems.length > 0) {
+			for (var i = 0; i < elems.length; i++){
+				var name = elems[i].name; 
+				var type = elems[i].type;
+				if (!validateElementType(type))
+					throw new InvalidOptionsException("Form element type is not valid for " + name + ".");
+			}
+		} else {
+			throw new InvalidOptionsException("No form elements provided. Minimum one form element is required.");
+		}
+	};
+	var validateElementType = function (type) {
+		return $.inArray(type, VALID_TYPES) > -1;
+	};
 	/**
 	 * Check and set required properties to element.
 	 */
 	var setPropertiesToElem = function (elem) {
 		$(elem).addClass("boot-form-main");
 	};
+	/**
+	 * 
+	 */
 	var startPreview = function (elem, options) {
 		var defaults = { 
 			width:false,
@@ -113,6 +139,22 @@
 		this.form = undefined;
 		this.draw = function () {
 			this.form = $("<div></div>").addClass("boot-form-clear");
+		};
+		this.get = function () {
+			if (this.form && this.form !== undefined){
+			} else {this.draw();}
+			return this.form;
+		};
+	};
+	/**
+	 * Form bottom clear reference.
+	 * @param options
+	 */
+	FormErrorBox = function (message) {
+		this.form = undefined;
+		this.message = message;
+		this.draw = function () {
+			this.form = $("<div></div>").addClass("boot-form-error-box alert alert-danger").html(this.message);
 		};
 		this.get = function () {
 			if (this.form && this.form !== undefined){
