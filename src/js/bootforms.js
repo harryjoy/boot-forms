@@ -60,6 +60,7 @@
 		var defaults = { 
 			width:false,
 			height:false,
+			form: {},
 			form_elems: []
 		},
  		options = $.extend(true, defaults, options);
@@ -70,7 +71,7 @@
 		var elems = options.form_elems;
 		if (elems && elems !== undefined && elems.length > 0) {
 			for (var i = 0; i < elems.length; i++){
-				var formElem = new FormElementWrapper(options, 'boot-form-id', '' + elems[i].name, elems[i].type);
+				var formElem = new FormElementWrapper(options, 'boot-form-id', elems[i]);
 				mainForm.append(formElem.get());
 			}
 			var formSubmitButton = new FormSubmitButton(options);
@@ -120,6 +121,13 @@
 		};
 		this.draw = function () {
 			this.form = $("<form></form>").attr('id', 'boot-form-id').addClass("boot-form");
+			var opts = this.options.form;
+			if (opts !== undefined) {
+				var self = this;
+				$.each(opts, function (key, value){
+					self.form.attr(key, value);
+				});
+			}
 			this.setOptions();
 		};
 		this.get = function () {
@@ -227,17 +235,18 @@
 	 * Form element wrapper reference.
 	 * @param options
 	 */
-	FormElementWrapper = function (options, formId, elemName, elemType) {
+	FormElementWrapper = function (options, formId, element) {
 		this.elem = undefined;
 		this.formId = formId;
 		this.options = options;
-		this.elemName = elemName;
-		this.elemType = elemType;
+		this.elemName = element.name;
+		this.elemType = element.type;
+		this.element = element;
 		this.setOptions = function () {
 		};
 		this.draw = function () {
 			this.elem = $("<div></div>").addClass("boot-form-element-wrapper");
-			var formElem = new FormElement(this.options, this.formId, this.elemName, this.elemType);
+			var formElem = new FormElement(this.options, this.formId, this.element);
 			this.elem.append(formElem.get());
 			this.setOptions();
 		};
@@ -258,23 +267,45 @@
 		this.getElemType = function () {
 			return this.elemType;
 		};
+		this.getElement = function () {
+			return this.element;
+		};
 	};
 	/**
 	 * Form element reference.
 	 * @param options
 	 */
-	FormElement = function (options, formId, elemName, elemType) {
+	FormElement = function (options, formId, element) {
 		this.elem = undefined;
 		this.formId = formId;
 		this.options = options;
-		this.elemName = elemName;
-		this.elemType = elemType;
+		this.elemName = element.name;
+		this.elemType = element.type;
+		this.element = element;
 		this.setOptions = function () {
 		};
 		this.draw = function () {
 			this.elem = $("<input/>").attr('placeholder', this.elemName).attr('type', this.elemType)
 					.attr('name', this.elemName).addClass("boot-form-element form-control");
+			this.setCustomAttributes();
 			this.setOptions();
+		};
+		this.setCustomAttributes = function () {
+			var self = this;
+			$.each(this.element, function (key, value){
+				 if (key === "attr") { 
+					 var attrs = value;
+					 if (attrs && attrs !== undefined && attrs.length > 0) {
+						 $.each(attrs, function (k, v) {
+							 $.each(v, function (ky, val) {
+								 self.elem.attr(ky, val);
+							 });
+						 });
+					 }
+				 } else {
+					 self.elem.attr(key, value);
+				 }
+			});
 		};
 		this.get = function () {
 			if (this.elem && this.elem !== undefined){
@@ -292,6 +323,9 @@
 		};
 		this.getElemType = function () {
 			return this.elemType;
+		};
+		this.getElement = function () {
+			return this.element;
 		};
 	};
 	/**
