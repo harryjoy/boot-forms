@@ -1,19 +1,24 @@
 .boot-form-main {
-	border: 1px solid #ccc;
+	border: 1px solid #fa6709;
 	border-bottom: none;
 	min-height: 10px;
 	width: 350px;
 	display: none;
-	background: #fff;
+	background: rgb(225, 50, 10);
+	color: #fff;
 	position:fixed;
 	bottom: 0;
 	right: 0;
+}
+.boot-form-main a:hover {
+	color: #fafafa;
 }
 .boot-form-header-wrapper {
 	text-align: center;
 }
 .boot-form-header {
 	margin-top: 0px;
+	color: #fff !important;
 }
 .boot-form-container {
 	padding: 20px;
@@ -44,8 +49,20 @@
 .bootform-element-username {
 }
 .bootform-element-btn-submit {
+	background: rgb(230, 50, 10);
+	border: 1px solid #ff6767;
+}
+.bootform-element-btn-submit:hover {
+	background: rgb(255, 60, 25);
+	border: 1px solid #ff6767;
 }
 .bootform-element-btn-cancel {
+	background: rgb(230, 50, 10);
+	border: 1px solid #ff6767;
+}
+.bootform-element-btn-cancel:hover {
+	background: rgb(255, 60, 25);
+	border: 1px solid #ff6767;
 }
 .boot-form-toggle-element-wrapper {
 }
@@ -55,12 +72,17 @@
 	border: 1px solid #CCC;
 	border-bottom: none;
 	padding-top: 2px;
-	background: #fff;
+	background: rgb(225, 50, 10);
+	color: #fff;
 	position:fixed;
 	bottom: 0;
 	right: 0;
 }
 .boot-form-toogle-element-open {
+	color: #fff;
+}
+.boot-form-toogle-element-open:hover {
+	color: #fff;
 }
 .boot-form-toogle-element-close {
 	display: none;
@@ -75,7 +97,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	background: #E6E6E6;
+	background: rgb(255, 80, 80);
 	padding: 0px 5px;
 	cursor: pointer;
 }
