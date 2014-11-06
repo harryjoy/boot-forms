@@ -4,8 +4,8 @@
 	min-height: 10px;
 	width: 350px;
 	display: none;
-	background: #fff;
-	position:fixed;
+	background: #f6f6f6;
+	position:absolute;
 	bottom: 0;
 	right: 0;
 }
@@ -55,8 +55,8 @@
 	border: 1px solid #CCC;
 	border-bottom: none;
 	padding-top: 2px;
-	background: #fff;
-	position:fixed;
+	background: #f6f6f6;
+	position:absolute;
 	bottom: 0;
 	right: 0;
 }
@@ -75,7 +75,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	background: #E6E6E6;
+	background: #aaa;
 	padding: 0px 5px;
 	cursor: pointer;
 }
