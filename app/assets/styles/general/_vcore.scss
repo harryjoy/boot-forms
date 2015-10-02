@@ -1,0 +1,163 @@
+// General style for the application
+@font-face {
+    font-family: 'robotolight';
+    src: url('./roboto-light-webfont.eot');
+    src: url('./roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./roboto-light-webfont.woff2') format('woff2'),
+         url('./roboto-light-webfont.woff') format('woff'),
+         url('./roboto-light-webfont.ttf') format('truetype'),
+         url('./roboto-light-webfont.svg#robotolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url('./roboto-regular-webfont.eot');
+    src: url('./roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'robotothin';
+    src: url('./roboto-thin-webfont.eot');
+    src: url('./roboto-thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./roboto-thin-webfont.woff2') format('woff2'),
+         url('./roboto-thin-webfont.woff') format('woff'),
+         url('./roboto-thin-webfont.ttf') format('truetype'),
+         url('./roboto-thin-webfont.svg#robotothin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html,
+body {
+  font-family: 'robotoregular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  background: $white;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+a {
+  color: $link-color;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    text-decoration: none;
+    color: $link-hover-color;
+  }
+}
+
+// Text sizes
+.text-big {
+  font-size: 25px !important;
+}
+
+.text-normal {
+  font-size: 12px;
+}
+
+.text-medium {
+  font-size: 18px;
+}
+
+.text-small {
+  font-size: 10px;
+}
+
+.text-light {
+  font-weight: 400;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: 400;
+}
+
+.text-cursor-pointer {
+  cursor: pointer;
+}
+
+// utility
+.hide {
+  display: none !important;
+}
+
+.no-border {
+  border: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.clearfix {
+  @include clearfix();
+}
+
+// utility classes for padding and margins.
+@for $i from 0 through 15 {
+  .pad-#{$i} { padding: 1px * $i; }
+  .pad-left-#{$i} { padding-left: 1px * $i; }
+  .pad-right-#{$i} { padding-right: 1px * $i; }
+  .pad-top-#{$i} { padding-top: 1px * $i; }
+  .pad-bottom-#{$i} { padding-bottom: 1px * $i; }
+  .pad-vertical-#{$i} { padding-top: 1px * $i; padding-bottom: 1px * $i; }
+  .pad-horizontal-#{$i} { padding-left: 1px * $i; padding-right: 1px * $i; }
+
+  .margin-#{$i} { margin: 1px * $i; }
+  .margin-left-#{$i} { margin-left: 1px * $i; }
+  .margin-right-#{$i} { margin-right: 1px * $i; }
+  .margin-top-#{$i} { margin-top: 1px * $i; }
+  .margin-bottom-#{$i} { margin-bottom: 1px * $i; }
+  .margin-vertical-#{$i} { margin-top: 1px * $i; margin-bottom: 1px * $i; }
+  .margin-horizontal-#{$i} { margin-left: 1px * $i; margin-right: 1px * $i; }
+  .margin-vertical-auto-#{$i} { margin: 1px * $i auto; }
+  .margin-horizontal-auto-#{$i} { margin: auto 1px * $i; }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: 'roboto', sans-serif;
+}
+
+img {
+  max-width: none;
+}
+
+.relative-position {
+  position: relative;
+}
+
+.display-block {
+  display: block;
+}

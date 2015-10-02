@@ -1,0 +1,29 @@
+// All variables for site design goes in here
+
+// general colors
+$white: #fff;
+$black: #000;
+
+//Link colors (Aka: <a> tags)
+$link-color: #425d79 !default;
+$link-hover-color: lighten($link-color, 15%) !default;
+
+// footer
+$footer-font-family: 'robotomedium', sans-serif;
+$footer-background: #1E1E1E;
+$footer-color: #909090;
+$footer-header-color: #D4D4D4;
+$footer-link-font-family: 'robotoregular';
+$footer-company-list-color: rgb(144, 144, 144);
+
+// Item cards
+$card-bg:                   $white !default;
+$card-width:                100% !default;
+$card-border-color:         #9aa9b7 !default;
+$card-shadow:               0 1px 3px rgba(0, 0, 0, .1) !default;
+$card-header-border-bottom:   1px solid $gray-lighter !default;
+$card-header-color:           #454545 !default;
+$card-header-padding-bottom:  0 !default;
+$card-title-font-size:    20px !default;
+$card-title-font-weight:  400 !default;
+$card-footer-bg:          darken($white, 5%) !default;

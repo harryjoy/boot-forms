@@ -1,0 +1,23 @@
+<div class="col-md-6 col-xs-12 pad-5">
+  <div class="item-card">
+    <div class="item-body no-padding">
+      <img src="assets/images/{{item.img}}" class="img-responsive">
+      <div class="pad-5">
+        <p class="lead margin-bottom-1 text-primary">{{item.name}}</p>
+        <span class="text-muted" tooltip="Item Slug"><i class="fa fa-tag"></i> {{item.slug}}</span>
+        <span class="text-muted pull-right margin-right-2">age {{item.age}}</span>
+      </div>
+    </div>
+    <div class="item-footer text-muted text-normal">
+      <span tooltip="Timezone">
+        <i class="fa fa-clock-o"></i> {{item.timezone}}
+      </span>
+      <span class="pull-right">
+        <span class="margin-right-15">
+          Gender: <i class="fa text-muted" ng-class="{'fa-venus-mars': item.gender === 'MF', 'fa-venus': item.gender === 'F', 'fa-mars': item.gender === 'M'}" tooltip="Allowed Gender: {{item.gender}}" tooltip-placement="left"></i>
+        </span>
+        <i class="fa fa-map-marker"></i> {{item.countryCode}} - {{item.distance}} miles
+      </span>
+    </div>
+  </div>
+</div>
