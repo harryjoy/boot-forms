@@ -13,6 +13,22 @@
   function HomeController($scope, $window, FileServ) {
     var origCoord = { latitude: 45, longitude: -73 };
     var vm = this;
+    vm.map2 = {
+      center: {
+        latitude: 53.406754,
+        longitude: -2.158843
+      },
+      pan: true,
+      zoom: 14,
+      refresh: false,
+      options: {
+        disableDefaultUI: true
+      },
+      events: {},
+      bounds: {},
+      polys: [],
+      draw: undefined
+    }
     vm.searchObj = {
       selectedGender: {
         name: 'Both',
@@ -81,8 +97,8 @@
         minimumClusterSize: 2
       },
       events: {
-        zoom_changed: updateItemList,
-        dragend: updateItemList
+        // zoom_changed: updateItemList,
+        // dragend: updateItemList
       }
     };
 
