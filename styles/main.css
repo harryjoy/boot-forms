@@ -13872,6 +13872,11 @@ footer ul li a {
   width: 75px !important;
 }
 
+/* line 40, ../../app/assets/styles/pages/_home.scss */
+.col-md-4, .col-md-8 {
+  padding-left: 0px;
+}
+
 /* line 26, ../../app/assets/styles/main.scss */
 body {
   padding: 0;
