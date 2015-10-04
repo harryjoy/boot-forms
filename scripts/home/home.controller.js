@@ -83,7 +83,7 @@
     init();
 
     function init() {
-      FileServ.readFile('assets/conf/input.json').then(function(data){
+      FileServ.readFile('assets/conf/input2.json').then(function(data){
         vm.items = data.items;
         vm.city = data.city;
       });
