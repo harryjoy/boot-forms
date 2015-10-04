@@ -9,26 +9,9 @@
 (function() {
   'use strict';
   angular.module('wooterApp').controller('HomeCtrl', HomeController);
-  HomeController.$inject = ['$scope', '$window', 'FileServ'];
-  function HomeController($scope, $window, FileServ) {
-    var origCoord = { latitude: 45, longitude: -73 };
-    var vm = this;
-    vm.map2 = {
-      center: {
-        latitude: 53.406754,
-        longitude: -2.158843
-      },
-      pan: true,
-      zoom: 14,
-      refresh: false,
-      options: {
-        disableDefaultUI: true
-      },
-      events: {},
-      bounds: {},
-      polys: [],
-      draw: undefined
-    }
+  HomeController.$inject = ['$scope', '$window', 'FileServ', 'leafletEvents', 'leafletData'];
+  function HomeController($scope, $window, FileServ, leafletEvents, leafletData) {
+    var vm = this, bounds = [], defaultOpacity = 0.5;
     vm.searchObj = {
       selectedGender: {
         name: 'Both',
@@ -79,27 +62,17 @@
     }];
 
     vm.map = {
-      control: {},
-      markerControl: {},
-      center: origCoord,
-      zoom: 8,
-      markers: [],
-      options: {
-        streetViewControl: false,
-        panControl: false,
-        maxZoom: 20,
-        minZoom: 3,
-        // draggable: false
+      defaults: {
+        maxZoom: 18,
+        zoomControlPosition: 'topright',
+        scrollWheelZoom: false
       },
-      clusterOptions: {
-        gridSize: 60,
-        ignoreHidden: false,
-        minimumClusterSize: 2
+      center: {
+        lat: 40.768452,
+        lng: -73.832764,
+        zoom: 11
       },
-      events: {
-        // zoom_changed: updateItemList,
-        // dragend: updateItemList
-      }
+      markers: {}
     };
 
     vm.toggleAgeGroupSelection = function(selection) {
@@ -107,72 +80,68 @@
       vm.searchObj.selectAgeRange = (selection === 2);
     };
 
-    $scope.$watch('home.filteredItems', function() {
-      if (vm.filteredItems) {
-        vm.map.markers.forEach(function(marker) {
-          var match = false;
-          vm.filteredItems.forEach(function(item) {
-            if (item.id === marker.id) { match = true; }
-          });
-          marker.options.visible = match;
-        });
-        refreshMap();
-      }
-    }, true);
-
     init();
 
     function init() {
       FileServ.readFile('assets/conf/input.json').then(function(data){
         vm.items = data.items;
         vm.city = data.city;
-        angular.forEach(data.items, function(item) {
-          vm.map.markers.push({
-            latitude: item.latlng[0],
-            longitude: item.latlng[1],
-            title: item.name,
-            id: item.id,
-            options: {
-              visible: true,
-              draggable: false
+      });
+      $scope.$on('leafletDirectiveMarker.click', function(event, obj){
+        vm.filteredItems.forEach(function(item) {
+          if (item.id === obj.model.id) {
+            vm.selectedItem = item;
+            return;
+          }
+        });
+      });
+      $scope.$watch('home.filteredItems', function() {
+        if (vm.filteredItems) {
+          vm.map.markers = {};
+          bounds = [];
+          angular.forEach(vm.filteredItems, function(item) {
+            vm.map.markers[item.id] = {
+              lat: item.latlng[0],
+              lng: item.latlng[1],
+              draggable: false,
+              group: 'main',
+              opacity: defaultOpacity,
+              id: item.id
+            };
+            bounds.push(item.latlng);
+          });
+          leafletData.getMap().then(function(map) {
+            map.fitBounds(bounds);
+          });
+        }
+      }, true);
+      $scope.$watch('home.selectedItem', function() {
+        var searchedBounds = [];
+        if (vm.selectedItem) {
+          $window._.forOwn(vm.map.markers, function(marker, id){
+            if (vm.selectedItem.id === id) {
+              marker.opacity = 1.0;
+              vm.map.center.lat = marker.lat;
+              vm.map.center.lng = marker.lng;
+              searchedBounds.push([marker.lat, marker.lng]);
+            } else {
+              marker.opacity = 0.2;
             }
           });
-        });
-      });
-    }
-
-    function refreshMap() {
-      var map = vm.map.control.getGMap();
-      var bounds = new $window.google.maps.LatLngBounds();
-      vm.map.markers.forEach(function(marker) {
-        if (marker.options.visible) {
-          bounds.extend(getMarkerPosition(marker));
+        } else {
+          if (Object.getOwnPropertyNames(vm.map.markers).length > 0) {
+            $window._.forOwn(vm.map.markers, function(marker) {
+              searchedBounds.push([marker.lat, marker.lng]);
+              marker.opacity = defaultOpacity;
+            });
+          }
+        }
+        if (searchedBounds.length > 0) {
+          leafletData.getMap().then(function(map) {
+            map.fitBounds(searchedBounds);
+          });
         }
       });
-      map.fitBounds(bounds);
-    }
-
-    function getMarkerPosition(marker) {
-      return {
-        lat: function() { return marker.latitude; },
-        lng: function() { return marker.longitude; }
-      };
-    }
-
-    function updateItemList() {
-      if (vm.map.control.getGMap) {
-        var bounds = vm.map.control.getGMap().getBounds();
-        var visibleMarkers = $window._.filter(vm.map.markers, function(marker) {
-          return bounds.contains(getMarkerPosition(marker));
-        });
-        vm.filteredItems = $window._.filter(vm.items, function(item) {
-          var isVisible = false;
-          $window._.forEach(visibleMarkers, function(marker) {
-            if (marker.id === item.id) { isVisible = true; }
-          });
-          return isVisible;
-        });
-      }
     }
   }
 })();

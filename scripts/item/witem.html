@@ -1,11 +1,12 @@
 <div class="col-md-6 col-xs-12 pad-5">
-  <div class="item-card">
+  <div class="item-card text-cursor-pointer">
     <div class="item-body no-padding">
       <img src="assets/images/{{item.img}}" class="img-responsive">
       <div class="pad-5">
         <p class="lead margin-bottom-1 text-primary">{{item.name}}</p>
         <span class="text-muted" tooltip="Item Slug"><i class="fa fa-tag"></i> {{item.slug}}</span>
         <span class="text-muted pull-right margin-right-2">age {{item.age}}</span>
+        <span class="item-price-tag lead">${{item.price}}</span>
       </div>
     </div>
     <div class="item-footer text-muted text-normal">

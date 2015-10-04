@@ -24,7 +24,7 @@
     'ui.router',
     'ui.bootstrap',
     'ui.select',
-    'uiGmapgoogle-maps',
+    'leaflet-directive',
 
     'wooterApp.shared'
   ]).config(function ($routeProvider) {

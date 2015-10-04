@@ -13433,10 +13433,27 @@ img {
   height: 250px;
 }
 /* line 18, ../../app/assets/styles/modules/_item-details.scss */
+.item-card .item-body.item-body-lg img {
+  height: 350px;
+}
+/* line 24, ../../app/assets/styles/modules/_item-details.scss */
 .item-card .item-footer {
   border-top: 1px solid #eeeeee;
   padding: 5px;
   background-color: #f2f2f2;
+}
+/* line 30, ../../app/assets/styles/modules/_item-details.scss */
+.item-card .item-price-tag {
+  display: block;
+  padding: 5px 15px;
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  font-size: 28px;
+  color: #fff;
+  font-weight: 700;
+  background-color: rgba(91, 188, 46, 0.51);
+  text-shadow: 00 1px #4b4b4b;
 }
 
 /*FOUNDATIONAL FOOTER CSS*/
@@ -13837,44 +13854,117 @@ footer ul li a {
 }
 
 /* line 9, ../../app/assets/styles/pages/_home.scss */
-.breadcrumb {
-  margin-bottom: 0px;
-  border-radius: 0;
-  border: 1px solid #eeeeee;
-  background-color: #19b1f9;
-  color: #f6f6f6;
-}
-
-/* line 17, ../../app/assets/styles/pages/_home.scss */
-.filter-box {
-  border: 1px solid #eeeeee;
-  padding-top: 10px;
-  background: #fff;
-}
-
-/* line 23, ../../app/assets/styles/pages/_home.scss */
-.items-holder {
-  background: #eeeeee;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 20px;
-  height: 580px;
-  overflow: auto;
-}
-
-/* line 32, ../../app/assets/styles/pages/_home.scss */
 .angular-google-map-container {
   height: 700px;
 }
 
-/* line 36, ../../app/assets/styles/pages/_home.scss */
+/* line 13, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-small {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* line 17, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-small div {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* line 21, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-medium {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* line 25, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-medium div {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* line 29, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-large {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* line 33, ../../app/assets/styles/pages/_home.scss */
+.marker-cluster-large div {
+  background-color: rgba(25, 177, 249, 0.6);
+}
+
+/* IE 6-8 fallback colors */
+/* line 39, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-small {
+  background-color: #19b1f9;
+}
+
+/* line 43, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-small div {
+  background-color: #19b1f9;
+}
+
+/* line 47, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-medium {
+  background-color: #19b1f9;
+}
+
+/* line 51, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-medium div {
+  background-color: #19b1f9;
+}
+
+/* line 55, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-large {
+  background-color: #19b1f9;
+}
+
+/* line 59, ../../app/assets/styles/pages/_home.scss */
+.leaflet-oldie .marker-cluster-large div {
+  background-color: #19b1f9;
+}
+
+/* line 63, ../../app/assets/styles/pages/_home.scss */
+.map-holder {
+  height: 100%;
+}
+
+/* line 67, ../../app/assets/styles/pages/_home.scss */
 .small-range-box {
   width: 75px !important;
 }
 
-/* line 40, ../../app/assets/styles/pages/_home.scss */
+/* line 71, ../../app/assets/styles/pages/_home.scss */
 .col-md-4, .col-md-8 {
-  padding-left: 0px;
+  padding-left: 0;
+}
+
+/* line 75, ../../app/assets/styles/pages/_home.scss */
+.col-md-4 {
+  padding-right: 0;
+}
+
+/* line 79, ../../app/assets/styles/pages/_home.scss */
+.item-list-view {
+  height: 100%;
+  overflow: auto;
+}
+/* line 83, ../../app/assets/styles/pages/_home.scss */
+.item-list-view .breadcrumb {
+  margin-bottom: 0;
+  border-radius: 0;
+  border: 1px solid #eeeeee;
+  background-color: #19b1f9;
+  color: #f6f6f6;
+  padding-left: 25px;
+}
+/* line 92, ../../app/assets/styles/pages/_home.scss */
+.item-list-view .filter-box {
+  border: 1px solid #eeeeee;
+  padding-top: 10px;
+  background: #fff;
+  padding-left: 25px;
+}
+/* line 99, ../../app/assets/styles/pages/_home.scss */
+.item-list-view .items-holder, .item-list-view .items-details-view {
+  background: #eeeeee;
+  padding-left: 20px;
+  padding-right: 10px;
 }
 
 /* line 26, ../../app/assets/styles/main.scss */

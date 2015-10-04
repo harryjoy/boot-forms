@@ -1,16 +1,20 @@
-<div class="row">
-  <div class="col-md-4 col-xs-12">
-    <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom" options="home.map.options" control="home.map.control" events="home.map.events">
+<div class="row map-holder relative-position">
+  <div class="col-md-4 col-xs-12 map-holder">
+    <!-- <ui-gmap-google-map center="home.map.center" zoom="home.map.zoom" options="home.map.options" control="home.map.control" events="home.map.events">
       <ui-gmap-markers models="home.map.markers" coords="'self'" icon="'icon'" doCluster="true" fit="true" options="'options'" clusterOptions="home.map.clusterOptions" modelsbyref="true" control="home.map.markerControl">
       </ui-gmap-markers>
-    </ui-gmap-google-map>
+    </ui-gmap-google-map> -->
+    <leaflet defaults="home.map.defaults" center="home.map.center" markers="home.map.markers" height="100%" width="100%"></leaflet>
   </div>
-  <div class="col-md-8 col-xs-12">
+  <div class="col-md-8 col-xs-12 item-list-view">
     <div class="row">
       <ol class="breadcrumb">
         <li>City</li>
-        <li class="active">{{home.city}}</li>
+        <li ng-class="{'active': !home.selectedItem, 'text-cursor-pointer': home.selectedItem}" ng-click="home.selectedItem = undefined;">{{home.city}}</li>
+        <li class="active" ng-show="home.selectedItem">{{home.selectedItem.name}}</li>
       </ol>
+    </div>
+    <div class="row" ng-hide="home.selectedItem">
       <div class="col-xs-12 filter-box">
         <ul class="list-inline">
           <li>
@@ -59,11 +63,14 @@
         </ul>
       </div>
     </div>
-    <div class="row items-holder">
+    <div class="row items-holder" ng-hide="home.selectedItem">
       <div class="col-xs-12 text-right pad-right-5">
         <span class="text-muted">Total {{home.items ? home.items.length : 0}} Items</span>
       </div>
-      <w-item ng-model="item" ng-repeat="item in (home.filteredItems = (home.items | ItemFilter:home.searchObj:['name','slug', 'timezone']))"/>
+      <w-item ng-click="home.selectedItem = item;" ng-model="item" ng-repeat="item in (home.filteredItems = (home.items | ItemFilter:home.searchObj:['name','slug', 'timezone']))"/>
+    </div>
+    <div class="row items-details-view" ng-show="home.selectedItem">
+      <w-item-details ng-model="home.selectedItem"/>
     </div>
   </div>
 </div>
