@@ -65,7 +65,8 @@
       defaults: {
         maxZoom: 18,
         zoomControlPosition: 'topright',
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        zoomAnimationThreshold: 18
       },
       center: {
         lat: 40.768452,
@@ -74,6 +75,8 @@
       },
       markers: {}
     };
+
+    // vm.mapHidden = true;
 
     vm.toggleAgeGroupSelection = function(selection) {
       vm.searchObj.selectAgeGroup = (selection === 1);
@@ -110,9 +113,11 @@
             };
             bounds.push(item.latlng);
           });
-          leafletData.getMap().then(function(map) {
-            map.fitBounds(bounds);
-          });
+          if (bounds.length > 0) {
+            leafletData.getMap().then(function(map) {
+              map.fitBounds(bounds, {animate: true});
+            });
+          }
         }
       }, true);
       $scope.$watch('home.selectedItem', function() {
@@ -121,8 +126,6 @@
           $window._.forOwn(vm.map.markers, function(marker, id){
             if (vm.selectedItem.id === id) {
               marker.opacity = 1.0;
-              vm.map.center.lat = marker.lat;
-              vm.map.center.lng = marker.lng;
               searchedBounds.push([marker.lat, marker.lng]);
             } else {
               marker.opacity = 0.2;
@@ -138,7 +141,7 @@
         }
         if (searchedBounds.length > 0) {
           leafletData.getMap().then(function(map) {
-            map.fitBounds(searchedBounds);
+            map.fitBounds(searchedBounds, {animate: true});
           });
         }
       });

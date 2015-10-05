@@ -1,0 +1,93 @@
+<div class="item-card" ng-class="{'text-cursor-pointer': !isDetails}">
+  <div class="item-body no-padding" ng-class="{'item-body-lg': isDetails}">
+    <carousel interval="0" disable-animation="true">
+      <slide ng-repeat="slide in item.images" active="slide.active">
+        <img ng-src="assets/images/{{slide.image}}" style="margin:auto;" ng-click="clickAction(item);">
+      </slide>
+    </carousel>
+    <div class="pad-5 pad-horizontal-15" ng-click="clickAction(item);">
+      <span class="text-muted pull-right margin-right-2 margin-top-5">age {{item.age}}</span>
+      <p class="lead margin-bottom-1 text-primary">{{item.name}}</p>
+      <span tooltip="Date and Timezone" class="text-muted">
+        <i class="fa fa-clock-o"></i> {{item.date}} {{item.timezone}}
+      </span>
+      <span class="item-price-tag item-price-tag-right lead">${{item.price}}</span>
+    </div>
+  </div>
+  <hr class="" ng-show="isDetails"/>
+  <div class="item-body item-body-lg" ng-show="isDetails">
+    <div class="item-availability-label">
+      <label>Availability:</label>
+    </div>
+    <div class="item-availability-bar-holder">
+      <div class="item-availability-bar-wrap">
+        <span class="item-availability-bar" ng-repeat="time in times" ng-class="{'is-selected': time.selected, 'is-booked': time.booked, 'text-cursor-pointer': !time.booked}" ng-click="bookSlot(time);">
+          <span class="item-availability-bar-tooltip">
+            {{time.range}}
+            <br/> {{time.booked ? 'Booked': (time.selected ? 'Selected' : 'Open')}}
+            <span class="item-availaility-tooltip-arrow"></span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="item-footer text-muted text-normal clearfix" ng-show="!isDetails" ng-click="clickAction(item);">
+    <span class="pull-right">
+      <i class="fa fa-map-marker"></i> {{item.countryCode}} - {{item.distance}} miles
+    </span>
+  </div>
+</div>
+<div class="item-card" ng-show="isDetails">
+  <div class="item-header">
+    <h3 class="item-title text-primary margin-left-15 pad-top-15">About this place</h3>
+  </div>
+  <div class="item-body item-body-lg">
+    <div class="row">
+      <div class="col-xs-8">
+        <p>
+          We offer services for <strong>{{item.age}}</strong> years and younger. We are operating at <strong>{{item.timezone}}</strong> timezone. We are open 8 hours a day, weekdays closed. We are active in <strong>{{item.provinceCode}}</strong> and we are <strong>{{item.distance}}</strong> miles far from you.
+        </p>
+        <p>
+          We offer services for <strong>{{item.gender === 'MF' ? 'Both (M/F)' : ((item.gender === 'M' ? 'Male' : 'Female') + ' only')}}</strong>.
+        </p>
+      </div>
+      <div class="col-xs-2 text-big text-center">
+        <i class="fa fa-users fa-fw"></i> <br/> 999
+      </div>
+      <div class="col-xs-2 text-big text-center">
+        <i class="fa fa-soccer-ball-o fa-fw"></i> <br/> 999
+      </div>
+    </div>
+  </div>
+  <hr class=""/>
+  <div class="item-body item-body-lg">
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="form-label"><i class="fa fa-clock-o fa-fw"></i> Opening Hours:</label>
+      </div>
+      <div class="col-xs-9">
+        <ul class="list-unstyled">
+          <li><strong>Mon-Fri</strong> 6:00 AM - 8:00 PM</li>
+          <li><strong>Sat-Sun</strong> 6:00 AM - 1:00 PM</li>
+        </ul>
+      </div>
+      <div class="col-xs-3">
+        <label class="form-label"><i class="fa fa-cubes fa-fw"></i> Amenities:</label>
+      </div>
+      <div class="col-xs-9">
+        <ul class="list-unstyled">
+          <li>conference table for 8</li>
+          <li>comfortable couch</li>
+          <li>lots of plugs</li>
+          <li>whiteboard</li>
+          <li>free wifi</li>
+          <li>restroom on premises</li>
+          <li>wheelchair accessible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="item-footer text-muted text-normal text-center">
+    Check out more about this place @ {{item.slug}}
+  </div>
+</div>

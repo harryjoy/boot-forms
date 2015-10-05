@@ -32,6 +32,10 @@
       templateUrl: 'scripts/home/home.html',
       controller: 'HomeCtrl',
       controllerAs: 'home'
+    }).when('/courts', {
+      templateUrl: 'scripts/courts/courts.html',
+      controller: 'CourtsCtrl',
+      controllerAs: 'courts'
     }).otherwise({
       redirectTo: '/'
     });

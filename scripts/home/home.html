@@ -1,8 +1,8 @@
 <div class="row map-holder relative-position">
-  <div class="col-md-4 col-xs-12 map-holder" ng-hide="home.mapHidden">
+  <div class="col-md-4 col-xs-12 map-holder pad-right-0" ng-hide="home.mapHidden">
     <leaflet defaults="home.map.defaults" center="home.map.center" markers="home.map.markers" height="100%" width="100%"></leaflet>
   </div>
-  <div class="col-xs-12 item-list-view" ng-class="{'col-md-8': !home.mapHidden, 'col-md-12': home.mapHidden}">
+  <div class="col-xs-12 item-list-view pad-right-0" ng-class="{'col-md-8': !home.mapHidden, 'col-md-12': home.mapHidden}">
     <div class="row">
       <div class="breadcrumb-holder">
         <span class="pull-right text-normal text-cursor-pointer margin-right-10 margin-top-10" ng-click="home.mapHidden = !home.mapHidden">
@@ -68,10 +68,12 @@
       <div class="col-xs-12 text-right pad-right-5">
         <span class="text-muted">Total {{home.items ? home.items.length : 0}} Items</span>
       </div>
-      <w-item ng-click="home.selectedItem = item;" ng-model="item" ng-repeat="item in (home.filteredItems = (home.items | ItemFilter:home.searchObj:['name','slug', 'timezone']))"/>
+      <div class="col-xs-12 pad-5"  ng-class="{'col-md-6': !home.mapHidden, 'col-md-4': home.mapHidden}" ng-repeat="item in (home.filteredItems = (home.items | ItemFilter:home.searchObj:['name','slug', 'timezone']))">
+        <w-item ng-click="home.selectedItem = item;" ng-model="item" is-details="false"/>
+      </div>
     </div>
     <div class="row items-details-view" ng-show="home.selectedItem">
-      <w-item-details ng-model="home.selectedItem"/>
+      <w-item ng-model="home.selectedItem" is-details="true"/>
     </div>
   </div>
 </div>

@@ -1,0 +1,62 @@
+<div class="row map-holder relative-position">
+  <div class="col-md-4 col-xs-12 map-holder pad-right-0 margin-bottom-5">
+    <leaflet defaults="courts.map.defaults" center="courts.map.center" markers="courts.map.markers" height="100%" width="100%"></leaflet>
+  </div>
+  <div class="col-xs-12 col-md-8 item-list-view pad-right-0">
+    <div class="row">
+      <div class="breadcrumb-holder">
+        <ol class="breadcrumb">
+          <li>City</li>
+          <li ng-class="{'active': !courts.selectedItem, 'text-cursor-pointer': courts.selectedItem}" ng-click="courts.selectedItem = undefined;">{{courts.city}}</li>
+          <li class="active" ng-show="courts.selectedItem">{{courts.selectedItem.name}}</li>
+        </ol>
+      </div>
+    </div>
+    <div class="row" ng-hide="courts.selectedItem">
+      <div class="col-xs-12 filter-box">
+        <span class="pull-right text-normal margin-top-5 text-cursor-pointer" ng-click="courts.clearFilters();" ng-show="courts.searchObj.date">
+          <i class="fa fa-close"></i> Clear Filters
+        </span>
+        <ul class="list-inline">
+          <li>
+            <label class="text-muted text-bold">Date</label>
+            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="courts.searchObj.date" is-open="courts.datePickerOpened" min-date="courts.minDate" close-text="Close" ng-click="courts.datePickerOpened = true;" placeholder="Select Date" />
+          </li>
+          <li>
+            <label class="text-muted text-bold">Start</label>
+            <ui-select ng-model="courts.searchObj.start" style="width: 175px;">
+              <ui-select-match allow-clear="true" placeholder="Start Time">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="time in courts.times | filter: $select.search">
+                <span ng-bind-html="time.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </li>
+          <li>
+            <label class="text-muted text-bold">End</label>
+            <ui-select ng-model="courts.searchObj.end" style="width: 175px;">
+              <ui-select-match allow-clear="true" placeholder="End Time">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="time in courts.times | filter: $select.search">
+                <span ng-bind-html="time.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row items-holder" ng-hide="courts.selectedItem">
+      <div class="col-xs-12 text-right pad-right-5">
+        <span class="text-muted">Total {{courts.filteredItems ? courts.filteredItems.length : 0}} Courts</span>
+      </div>
+      <div class="col-xs-12 pad-5 col-md-6" ng-repeat="item in (courts.filteredItems = (courts.items | CourtFilter:courts.searchObj))">
+        <w-court click-action="courts.getDetails" ng-model="item" is-details="false"/>
+      </div>
+    </div>
+    <div class="row pad-5 items-details-view" ng-show="courts.selectedItem">
+      <w-court ng-model="courts.selectedItem" is-details="!!courts.selectedItem"/>
+    </div>
+  </div>
+</div>

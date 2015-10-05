@@ -15,6 +15,7 @@
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="bower_components/Leafet.extra-markers/src/leaflet.extra-markers.css">
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -27,7 +28,7 @@
 
     <!-- Add your site or application content here -->
     <div ng-include="'scripts/shared/navbar/navbar.html'"></div>
-    <div class="container map-holder">
+    <div class="map-holder">
       <div ng-view="" class="map-holder"></div>
     </div>
     <div ng-include="'scripts/shared/footer/footer.html'"></div>
@@ -54,16 +55,20 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
     <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
     <!-- endbower -->
     <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script src="bower_components/Leafet.extra-markers/src/leaflet.extra-markers.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <!-- injector:js -->
+        <script src="scripts/courts/courts.controller.js"></script>
+        <script src="scripts/courts/wcourt.directive.js"></script>
         <script src="scripts/home/home.controller.js"></script>
-        <script src="scripts/item/witem-details.directive.js"></script>
         <script src="scripts/item/witem.directive.js"></script>
+        <script src="scripts/shared/filters/court.filter.js"></script>
         <script src="scripts/shared/filters/item.filter.js"></script>
         <script src="scripts/shared/services/file.service.js"></script>
         <!-- endinjector -->

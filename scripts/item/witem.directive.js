@@ -10,7 +10,8 @@
       templateUrl: 'scripts/item/witem.html',
       restrict: 'E',
       scope: {
-        item: '=ngModel'
+        item: '=ngModel',
+        isDetails: '=isDetails'
       }
     };
   });

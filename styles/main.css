@@ -13429,7 +13429,7 @@ img {
 }
 /* line 12, ../../app/assets/styles/modules/_item-details.scss */
 .item-card .item-body img {
-  width: 800px;
+  width: 100%;
   height: 250px;
 }
 /* line 18, ../../app/assets/styles/modules/_item-details.scss */
@@ -13454,6 +13454,11 @@ img {
   font-weight: 700;
   background-color: rgba(91, 188, 46, 0.51);
   text-shadow: 00 1px #4b4b4b;
+}
+/* line 42, ../../app/assets/styles/modules/_item-details.scss */
+.item-card .item-price-tag.item-price-tag-right {
+  right: 0;
+  left: auto;
 }
 
 /*FOUNDATIONAL FOOTER CSS*/
@@ -13935,8 +13940,8 @@ footer ul li a {
 }
 
 /* line 75, ../../app/assets/styles/pages/_home.scss */
-.col-md-4 {
-  padding-right: 0;
+.carousel-indicators {
+  display: none;
 }
 
 /* line 79, ../../app/assets/styles/pages/_home.scss */
@@ -13967,9 +13972,107 @@ footer ul li a {
   padding-right: 10px;
 }
 
+/* line 106, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder {
+  border: 1px solid #bbb;
+  height: 40px;
+  position: relative;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+/* line 114, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar-wrap {
+  display: table-row;
+}
+/* line 118, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar {
+  display: table-cell;
+  position: relative;
+  height: 38px;
+  opacity: 1;
+  text-align: center;
+  color: #fff;
+  line-height: 38px;
+  border-left: 1px solid #bbb;
+}
+/* line 128, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar:first-child {
+  border-left: 0;
+}
+/* line 133, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar:hover .item-availability-bar-tooltip {
+  display: block;
+}
+/* line 138, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-selected {
+  background: #f0ad4e;
+}
+/* line 141, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-selected .item-availability-bar-tooltip {
+  background-color: #31b0d5;
+}
+/* line 144, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-selected .item-availability-bar-tooltip .item-availaility-tooltip-arrow {
+  border-color: #31b0d5 transparent transparent;
+}
+/* line 150, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-booked {
+  background: #d9534f;
+}
+/* line 153, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-booked .item-availability-bar-tooltip {
+  background-color: #2390b0;
+}
+/* line 156, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar.is-booked .item-availability-bar-tooltip .item-availaility-tooltip-arrow {
+  border-color: #2390b0 transparent transparent;
+}
+/* line 162, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar .item-availability-bar-tooltip {
+  display: none;
+  position: absolute;
+  background-color: #5bc0de;
+  width: 60px;
+  top: -60px;
+  left: -20px;
+  line-height: 12px;
+  z-index: 999;
+  font-size: 12px;
+  padding: 3px;
+}
+/* line 174, ../../app/assets/styles/pages/_home.scss */
+.item-availability-bar-holder .item-availability-bar .item-availability-bar-tooltip .item-availaility-tooltip-arrow {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: #5bc0de transparent transparent;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+/* line 190, ../../app/assets/styles/pages/_home.scss */
+.extra-marker-square-blue {
+  opacity: 0.8 !important;
+}
+/* line 193, ../../app/assets/styles/pages/_home.scss */
+.extra-marker-square-blue:hover {
+  opacity: 1.0 !important;
+}
+
 /* line 26, ../../app/assets/styles/main.scss */
 body {
   padding: 0;
+}
+
+/* line 30, ../../app/assets/styles/main.scss */
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
