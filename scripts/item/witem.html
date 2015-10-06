@@ -1,6 +1,6 @@
 <div class="item-card text-cursor-pointer">
   <div class="item-body no-padding" ng-class="{'item-body-lg': isDetails}">
-    <img src="assets/images/{{item.img}}" class="img-responsive">
+    <img ng-src="assets/images/{{item.img}}" class="img-responsive">
     <div class="pad-5">
       <p class="lead margin-bottom-1 text-primary">{{item.name}}</p>
       <span class="text-muted" tooltip="Item Slug"><i class="fa fa-tag"></i> {{item.slug}}</span>

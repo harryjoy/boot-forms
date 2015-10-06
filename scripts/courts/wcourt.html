@@ -16,12 +16,47 @@
   </div>
   <hr class="" ng-show="isDetails"/>
   <div class="item-body item-body-lg" ng-show="isDetails">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="list-inline">
+          <li>
+            <label class="text-muted text-bold">Date</label>
+            <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="searchObj.date" is-open="datePickerOpened" min-date="minDate" close-text="Close" ng-click="datePickerOpened = true;" show-button-bar="false" placeholder="Select Date" />
+          </li>
+          <li>
+            <label class="text-muted text-bold">Start</label>
+            <ui-select ng-model="searchObj.start" style="width: 175px;">
+              <ui-select-match placeholder="Start Time">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="time in times | filter: $select.search">
+                <span ng-bind-html="time.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </li>
+          <li>
+            <label class="text-muted text-bold">End</label>
+            <ui-select ng-model="searchObj.end" style="width: 175px;">
+              <ui-select-match placeholder="End Time">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="time in times | filter: $select.search">
+                <span ng-bind-html="time.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>
+          </li>
+          <li>
+            <span class="btn btn-success">Book Now</span>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="item-availability-label">
-      <label>Availability:</label>
+      <label>Availability: {{booking}} {{direction}}</label>
     </div>
     <div class="item-availability-bar-holder">
-      <div class="item-availability-bar-wrap">
-        <span class="item-availability-bar" ng-repeat="time in times" ng-class="{'is-selected': time.selected, 'is-booked': time.booked, 'text-cursor-pointer': !time.booked}" ng-click="bookSlot(time);">
+      <div class="item-availability-bar-wrap" ng-mouseup="booking = false;" ng-mouseleave="booking = false;" ng-mousemove="mouseMoveOnOuter($event);">
+        <span class="item-availability-bar" ng-repeat="time in times" ng-class="{'is-selected': time.selected, 'is-booked': time.booked, 'text-cursor-pointer': !time.booked}" ng-mouseenter="bookSlot(time);" ng-mousedown="startBooking();bookSlot(time);">
           <span class="item-availability-bar-tooltip">
             {{time.range}}
             <br/> {{time.booked ? 'Booked': (time.selected ? 'Selected' : 'Open')}}
