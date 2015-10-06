@@ -17,12 +17,47 @@
       link: function($scope) {
         $scope.times = TimesArray;
         $scope.minDate = new Date();
+        $scope.cantBook = false;
         $scope.searchObj = {
           date: new Date()
         };
         $scope.$watch('searchObj.date', function() {
           $scope.times.forEach(function(t) {
             t.selected = false;
+          });
+        }, true);
+        $scope.$watch('searchObj.start', function() {
+          if (!$scope.searchObj.start || $scope.booking) { return; }
+          if (!$scope.searchObj.end || $scope.searchObj.end.value <= $scope.searchObj.start.value) {
+            $scope.searchObj.end = $window._.find(TimesArray, function(time) {
+              return time.value > $scope.searchObj.start.value;
+            });
+          }
+          $scope.cantBook = false;
+          $scope.times.forEach(function(t) {
+            if (t.index >= $scope.searchObj.start.index && t.index <= $scope.searchObj.end.index) {
+              if (!$scope.cantBook && t.booked) { $scope.cantBook = true; }
+              else { t.selected = true; }
+            } else {
+              t.selected = false;
+            }
+          });
+        }, true);
+        $scope.$watch('searchObj.end', function() {
+          if (!$scope.searchObj.end || $scope.booking) { return; }
+          if (!$scope.searchObj.start || $scope.searchObj.start.value >= $scope.searchObj.end.value) {
+            $scope.searchObj.start = $window._.findLast(TimesArray, function(time) {
+              return time.value < $scope.searchObj.end.value;
+            });
+          }
+          $scope.cantBook = false;
+          $scope.times.forEach(function(t) {
+            if (t.index >= $scope.searchObj.start.index && t.index < $scope.searchObj.end.index) {
+              if (!$scope.cantBook && t.booked) { $scope.cantBook = true; }
+              else { t.selected = true; }
+            } else {
+              t.selected = false;
+            }
           });
         }, true);
         $scope.mouseMoveOnOuter = function(event) {

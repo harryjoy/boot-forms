@@ -46,7 +46,7 @@
             </ui-select>
           </li>
           <li>
-            <span class="btn btn-success">Book Now</span>
+            <span class="btn" ng-class="{'btn-disabled btn-default': cantBook, 'btn-success': !cantBook}">Book Now</span>
           </li>
         </ul>
       </div>
@@ -64,6 +64,9 @@
           </span>
         </span>
       </div>
+    </div>
+    <div class="can-not-book-notice" ng-show="cantBook">
+      <p class="text-danger">Some of the selected time slots are already booked.</p>
     </div>
   </div>
   <div class="item-footer text-muted text-normal clearfix" ng-show="!isDetails" ng-click="clickAction(item);">
