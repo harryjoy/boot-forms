@@ -20,6 +20,11 @@
         $scope.searchObj = {
           date: new Date()
         };
+        $scope.$watch('searchObj.date', function() {
+          $scope.times.forEach(function(t) {
+            t.selected = false;
+          });
+        }, true);
         $scope.mouseMoveOnOuter = function(event) {
           if ($scope.x) {
             var deltaX = $scope.x - event.clientX;
