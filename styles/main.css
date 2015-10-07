@@ -10831,11 +10831,11 @@ footer ul li a {
 }
 
 /* line 190, ../../app/assets/styles/pages/_home.scss */
-.extra-marker-square-blue {
+.extra-marker-square-blue, .leaflet-marker-icon {
   opacity: 0.8 !important;
 }
 /* line 193, ../../app/assets/styles/pages/_home.scss */
-.extra-marker-square-blue:hover {
+.extra-marker-square-blue:hover, .leaflet-marker-icon:hover {
   opacity: 1.0 !important;
 }
 

@@ -53,27 +53,25 @@
             layerType: 'ROADMAP',
             type: 'google'
           },
-          // googleTerrain: {
-          //   name: 'Terrain',
-          //   layerType: 'TERRAIN',
-          //   type: 'google'
-          // },
           googleSatelliete: {
             name: 'Satellite',
             layerType: 'SATELLITE',
             type: 'google'
-          },
-          // googleHybrid: {
-          //   name: 'Hybrid',
-          //   layerType: 'HYBRID',
-          //   type: 'google'
-          // }
+          }
         },
       },
       controls: {
         custom: [ $window.L.control.locate({ follow: true }), ResetZoomControl ]
       },
-      markers: {}
+      markers: {},
+      markerIcon: {
+        iconUrl: 'assets/images/marker.png',
+        iconSize: [32, 32]
+      },
+      hoverMarkerIcon: {
+        iconUrl: 'assets/images/marker-hover.png',
+        iconSize: [32, 32]
+      }
     };
 
     vm.getDetails = function(item) {
@@ -105,6 +103,20 @@
           }
         });
       });
+      $scope.$on('leafletDirectiveMarker.mouseover', function(event, obj) {
+        $window._.forEach(vm.map.markers, function(marker) {
+          if (marker.id === obj.model.id) {
+            marker.icon = vm.map.hoverMarkerIcon;    
+          }
+        });
+      });
+      $scope.$on('leafletDirectiveMarker.mouseout', function(event, obj) {
+        $window._.forEach(vm.map.markers, function(marker) {
+          if (marker.id === obj.model.id) {
+            marker.icon = vm.map.markerIcon;    
+          }
+        });
+      });
       $scope.$watch('courts.filteredItems', function() {
         if (vm.filteredItems && !vm.selectedItem) {
           vm.map.markers = {};
@@ -117,13 +129,7 @@
               group: 'main',
               opacity: defaultOpacity,
               id: item.id,
-              icon: {
-                type: 'extraMarker',
-                icon: 'fa-flag-checkered',
-                markerColor: 'blue',
-                prefix: 'fa',
-                shape: 'square'
-              }
+              icon: vm.map.markerIcon
             };
             bounds.push(item.latlng);
           });
